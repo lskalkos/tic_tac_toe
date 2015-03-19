@@ -77,7 +77,7 @@ var Tic_Tac_Toe = {
 
 			//Detect a win
 			if (diagnol_win1 || diagnol_win2 || horizontal_win1 || horizontal_win2 || horizontal_win3 || vertical_win1 || vertical_win2 || vertical_win3) {
-				alert(player.name + " Won! Game set.");
+				alert(player.name + " Won! Game over.");
 				$input.val('').attr('disabled', '');
 				game_set = true;
 				location.reload(true);
@@ -211,12 +211,11 @@ var Tic_Tac_Toe = {
 					};
 
 				};
-				// };
 			})//keyup
 		};//humanMove
 
 		//Method to set up a human-human player game
-		this.twoPlayerGame = function() {
+		this.playComputer = function() {
 
 			player1 = new Tic_Tac_Toe.Player();
 			player2 = new Tic_Tac_Toe.Player();
@@ -230,10 +229,10 @@ var Tic_Tac_Toe = {
 
 			humanMove(false, player1, player2);
 
-		}, //twoPlayerGame
+		}, //playComputer
 
 		//Method to set up a computer-human game
-		this.singlePlayerGame = function() {
+		this.playHuman = function() {
 
 			player1 = new Tic_Tac_Toe.Player();
 			player1.name = prompt("Hello there. Please enter your name:");
@@ -254,7 +253,7 @@ var Tic_Tac_Toe = {
 
 			humanMove(true, player1, player2);	
 
-		}//singlePlayerGame
+		}//playHuman
 
 
 	},//Game
@@ -280,13 +279,13 @@ $(document).ready(function() {
 
 	$('#computer').click(function() {
 		var game = new Tic_Tac_Toe.Game();
-		game.singlePlayerGame();
+		game.playHuman();
 		$('input').removeAttr('disabled');		
 	});
 
 	$('#person').click(function() {
 		var game = new Tic_Tac_Toe.Game();
-		game.twoPlayerGame();
+		game.playComputer();
 		$('input').removeAttr('disabled');		
 	});	
 
