@@ -49,11 +49,16 @@ var Tic_Tac_Toe = {
 		//Set global game data
 		var $input = $('input'); //Collect all the DOM box inputs
 
+		var boxes = []; //Array holding all currently available boxes
+		$input.map(function() {
+			boxes.push(this.id);
+		});
+
+		console.log(boxes);
 		var pieces = ['x','o', 'X', 'O']; //Define board pieces
 		var turns = 0; //Set number of turns taken
 		var scores = {}; //Create key-value pair object to hold each box's value, X or O
 		var game_set = false; //Game starts with no one having won yet
-		var boxes = ["a", "b", "c", "d", "e", "f", "g", "h", "i"]; //Array holding all currently available boxes
 		var next_player = null; //Initialize a next player variable 		
 		var players = []; //Array to hold all players
 		var entry = null; //Initialize a box entry variable
@@ -63,17 +68,17 @@ var Tic_Tac_Toe = {
 		//Function to check if a player has won
 		function checkWins(player) {
 
-			var scores_array = Object.keys(scores);
+			var scores_array = Object.keys(scores); //Count the number of scores logged
 
 			//Defines what counts as a win with conditional statements and booleans
-			var diagnol_win1 = scores["e"] == scores["i"] && scores["e"]==scores["a"] && scores["e"] != undefined || false || null;
-			var diagnol_win2 = scores["e"] == scores["c"] && scores["e"]==scores["g"] && scores["e"] != undefined || false || null;
-			var horizontal_win1 = scores["a"] == scores["c"] && scores["a"]==scores["b"] && scores["a"] != undefined || false || null;				
-			var horizontal_win2 = scores["d"] == scores["f"] && scores["d"]==scores["e"] && scores["d"] != undefined || false || null;	
-			var horizontal_win3 = scores["g"] == scores["i"] && scores["g"]==scores["h"] && scores["g"] != undefined || false || null;	
-			var vertical_win1 = scores["a"] == scores["g"] && scores["a"]==scores["d"] && scores["a"] != undefined || false || null;	
-			var vertical_win2 = scores["b"] == scores["h"] && scores["b"]==scores["e"] && scores["b"] != undefined || false || null;	
-			var vertical_win3 = scores["c"] == scores["i"] && scores["c"]==scores["f"] && scores["c"] != undefined || false || null;	
+			var diagnol_win1 = scores[boxes[5]] == scores[boxes[9]] && scores[boxes[5]]==scores[boxes[1]] && scores[boxes[5]] != undefined || false || null;
+			var diagnol_win2 = scores[boxes[5]] == scores[boxes[3]] && scores[boxes[5]]==scores[boxes[7]] && scores[boxes[5]] != undefined || false || null;
+			var horizontal_win1 = scores[boxes[1]] == scores[boxes[3]] && scores[boxes[1]]==scores[boxes[2]] && scores[boxes[1]] != undefined || false || null;				
+			var horizontal_win2 = scores[boxes[4]] == scores[boxes[6]] && scores[boxes[4]]==scores[boxes[5]] && scores[boxes[4]] != undefined || false || null;	
+			var horizontal_win3 = scores[boxes[7]] == scores[boxes[9]] && scores[boxes[7]]==scores[boxes[8]] && scores[boxes[7]] != undefined || false || null;	
+			var vertical_win1 = scores[boxes[1]] == scores[boxes[7]] && scores[boxes[1]]==scores[boxes[4]] && scores[boxes[1]] != undefined || false || null;	
+			var vertical_win2 = scores[boxes[2]] == scores[boxes[8]] && scores[boxes[2]]==scores[boxes[5]] && scores[boxes[2]] != undefined || false || null;	
+			var vertical_win3 = scores[boxes[3]] == scores[boxes[9]] && scores[boxes[3]]==scores[boxes[6]] && scores[boxes[3]] != undefined || false || null;	
 
 			//Detect a win
 			if (diagnol_win1 || diagnol_win2 || horizontal_win1 || horizontal_win2 || horizontal_win3 || vertical_win1 || vertical_win2 || vertical_win3) {
@@ -150,6 +155,7 @@ var Tic_Tac_Toe = {
 						return false;
 					} else {
 
+						console.log(scores);
 						if(player1.turn == true) {
 							player1.piece = entry;
 						} else if(!computer_opponent_true && player2.turn == true) {
@@ -214,7 +220,7 @@ var Tic_Tac_Toe = {
 			})//keyup
 		};//humanMove
 
-		//Method to set up a human-human player game
+		//Method to set up a human-human game
 		this.playComputer = function() {
 
 			player1 = new Tic_Tac_Toe.Player();
@@ -275,18 +281,20 @@ var Tic_Tac_Toe = {
 //When the DOM is ready load game functions
 $(document).ready(function() {
 
-	$('input').attr('disabled','');
+	var $input = $('input');
+
+	$input.attr('disabled','');
 
 	$('#computer').click(function() {
 		var game = new Tic_Tac_Toe.Game();
 		game.playHuman();
-		$('input').removeAttr('disabled');		
+		$input.removeAttr('disabled');		
 	});
 
 	$('#person').click(function() {
 		var game = new Tic_Tac_Toe.Game();
 		game.playComputer();
-		$('input').removeAttr('disabled');		
+		$input.removeAttr('disabled');		
 	});	
 
 });
