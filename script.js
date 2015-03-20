@@ -47,6 +47,7 @@ var Tic_Tac_Toe = {
 	Game: function() {
 
 		//Set global game data
+
 		var $input = $('input'); //Collect all the DOM box inputs
 
 		var boxes = []; //Array holding all currently available boxes
@@ -54,7 +55,6 @@ var Tic_Tac_Toe = {
 			boxes.push(this.id);
 		});
 
-		console.log(boxes);
 		var pieces = ['x','o', 'X', 'O']; //Define board pieces
 		var turns = 0; //Set number of turns taken
 		var scores = {}; //Create key-value pair object to hold each box's value, X or O
@@ -155,7 +155,6 @@ var Tic_Tac_Toe = {
 						return false;
 					} else {
 
-						console.log(scores);
 						if(player1.turn == true) {
 							player1.piece = entry;
 						} else if(!computer_opponent_true && player2.turn == true) {
