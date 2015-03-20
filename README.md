@@ -1,7 +1,7 @@
 # Javascript Tic Tac Toe
 Tic Tac Toe game built with Javascript/jQuery
 
-Initialize a game object. 
+Instantiate a game object. 
 
 ```
 var game = new Tic_Tac_Toe.Game();
